@@ -1,16 +1,27 @@
 // demo 1 https://flexiblog-education.netlify.app/
 // demo 2 https://atixscripts.info/demo/html/minimag/index-13.html#
+import { Routes, Route, Link } from "react-router-dom";
+import Home from "./Pages/Home/Home";
+import Header from "./Pages/Shared/Header/Header";
+import About from "./Pages/About/About";
+import Contact from "./Pages/Contact/Contact";
+import Blog from "./Pages/Blog/Blog";
+import Register from "./Pages/Shared/Register/Register";
+import Login from "./Pages/Shared/Login/Login";
 
 function App() {
   return (
     <>
-      <h1 class="text-3xl font-bold underline">Hello world!</h1>
-      <button class="btn">Button</button>
-<button class="btn btn-primary">Button</button>
-<button class="btn btn-secondary">Button</button>
-<button class="btn btn-accent">Button</button>
-<button class="btn btn-ghost">Button</button>
-<button class="btn btn-link">Button</button>
+      <Header>
+        <Routes>
+          <Route path="/" element={<Home />}></Route>
+          <Route path="/home" element={<Home />}></Route>
+          <Route path="/contact" element={<Contact />}></Route>
+          <Route path="/blog" element={<Blog />}></Route>
+          <Route path="/login" element={<Login />}></Route>
+          <Route path="/register" element={<Register />}></Route>
+        </Routes>
+      </Header>
     </>
   );
 }
