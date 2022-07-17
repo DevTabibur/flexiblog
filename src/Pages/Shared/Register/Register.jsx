@@ -21,7 +21,7 @@ const Register = () => {
   };
 
   return (
-    <div className=" py-12 mt-20">
+    <div className="body py-12 pt-20">
       <div className="container mx-auto px-4">
         <div className="md:grid grid-cols-1 w-96 mx-auto gap-8 gy-4">
           <div className=" border rounded-lg p-10">
