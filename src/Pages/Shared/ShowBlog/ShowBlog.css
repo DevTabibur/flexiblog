@@ -1,0 +1,7 @@
+.blog-box{
+    position: relative;
+    transition: .4s;
+}
+.blog-box:hover{
+    transform: scale(1.1);
+}

@@ -8,7 +8,9 @@ import Contact from "./Pages/Contact/Contact";
 import Blog from "./Pages/Blog/Blog";
 import Register from "./Pages/Shared/Register/Register";
 import Login from "./Pages/Shared/Login/Login";
+import SingleBlog from "./Pages/SingleBlog/SingleBlog";
 
+// 
 function App() {
   return (
     <>
@@ -18,6 +20,8 @@ function App() {
           <Route path="/home" element={<Home />}></Route>
           <Route path="/contact" element={<Contact />}></Route>
           <Route path="/blog" element={<Blog />}></Route>
+          {/* load single blog */}
+          <Route path="/blog/:id" element={<SingleBlog/>}></Route>
           <Route path="/about" element={<About />}></Route>
           <Route path="/login" element={<Login />}></Route>
           <Route path="/register" element={<Register />}></Route>
