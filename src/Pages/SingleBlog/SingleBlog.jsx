@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 import useSingleBlog from "../../Hooks/useSingleBlog";
 import "./SingleBlog.css";
 
@@ -19,23 +19,9 @@ const SingleBlog = () => {
   ];
   return (
     <div className="">
-      {/* // <div className="my-10">
-    //   <div className="md:flex flex-row gap-4">
-    //     <div className="basis-1/4">
-    //       <div className="left-col">
-            
-    //       </div>
-    //     </div>
-
-    //     <div className="basis-3/4">
-    //       <div className="right-col">
-    //         <div className="img-box">
-    //           <img src={singleBlog?.blogImg} alt="blogImg" />
-    //         </div>
-    //       </div>
-    //     </div>
-    //   </div>
-    // </div> */}
+      {/* <div className="img-box">
+        <img src={singleBlog?.blogImg} alt="blogImg" />
+      </div> */}
 
       <label
         for="my-drawer-2"
@@ -48,10 +34,15 @@ const SingleBlog = () => {
         <div className="drawer-content md:grid grid-cols-1 mx-auto pt-0 my-0 pb-10">
           {/* <!-- Page content here --> */}
 
-          <div className="page-content">
-            <h2 className="text-3xl font-bold mb-8">{singleBlog?.title}</h2>
+          <div className="page-content overflow-auto ml-32">
+            <h2 className="text-3xl font-bold">{singleBlog?.title}</h2>
+            <h2 className="text-xl mb-8">{singleBlog?.description}</h2>
             <div className="author">
-              <img className="h-50 w-50 rounded-full" src={singleBlog?.authorImg} alt="authorImg" />
+              <img
+                className="h-50 w-50 rounded-full"
+                src={singleBlog?.authorImg}
+                alt="authorImg"
+              />
               <span>By {singleBlog?.author}</span>
             </div>
             <div className="img-box">
@@ -59,13 +50,9 @@ const SingleBlog = () => {
             </div>
 
             <div className="content-parra py-16">
-              <p>{singleBlog?.content}</p>
+              <p className="mt-10 text-lg">{singleBlog?.content}</p>
             </div>
-
-            
           </div>
-
-
         </div>
         <div className="drawer-side shadow">
           <label htmlFor="my-drawer-2" className="drawer-overlay"></label>

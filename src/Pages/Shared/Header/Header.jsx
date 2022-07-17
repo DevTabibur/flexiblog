@@ -1,10 +1,13 @@
 import React from "react";
 import "./Header.css";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation, useParams } from "react-router-dom";
 import Logo from '../../../assets/img/flexiblog logo.webp';
 import DarkLogo from '../../../assets/img/logo-dark.webp';
 
 const Header = ({ children }) => {
+
+  const {pathname} = useLocation();
+  const {id} = useParams();
   const menu = [
     <>
       <li>
@@ -72,7 +75,7 @@ const Header = ({ children }) => {
     </>
   ];
   return (
-    <>
+    <div>
       <div className="drawer drawer-end">
         <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content flex flex-col">
@@ -103,7 +106,7 @@ const Header = ({ children }) => {
                   </svg>
                 </label>
               </div>
-              <div className="flex-none hidden lg:block">
+              <div   className="flex-none hidden lg:block">
                 <ul className="menu menu-horizontal">
                   {/* <!-- Navbar menu content here --> */}
                   {menu}
@@ -122,7 +125,7 @@ const Header = ({ children }) => {
           </ul>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

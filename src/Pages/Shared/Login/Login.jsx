@@ -3,7 +3,9 @@ import './Login.css';
 
 const Login = () => {
   return (
-    <div>Login</div>
+    <>
+    <div className='container mx-auto px-4'>Login</div>
+    </>
   )
 }
 
