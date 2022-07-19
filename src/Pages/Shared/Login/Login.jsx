@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Login.css";
 import { useForm } from "react-hook-form";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -7,18 +7,47 @@ import {
   faGoogle,
   faTwitter,
 } from "@fortawesome/free-brands-svg-icons";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useAuthState, useSignInWithEmailAndPassword, useSignInWithGoogle } from "react-firebase-hooks/auth";
+import auth from "../../../Firebase/firebase.init";
 
 const Login = () => {
+  // for returning user the exact page he wants to enter after login
+  const navigate = useNavigate();
+  const location = useLocation();
+
+const [signInWithGoogle, googleUser, googleLoading, googleError] = useSignInWithGoogle(auth);
+const [
+  signInWithEmailAndPassword,
+  signInUser,
+  signInLoading,
+  signInError,
+] = useSignInWithEmailAndPassword(auth);
+
+const [user] = useAuthState(auth);
+console.log(user)
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
+  const [email, setEmail] = useState('');
   const onSubmit = (data) => {
-    console.log(data);
+    signInWithEmailAndPassword(data.email, data.password);
+    setEmail(data.email);
+    console.log('user', data)
   };
+
+ 
+  // if user logged-in then it'll take user the page what they want to see the page,
+  let from = location.state?.from?.pathname || "/";
+  useEffect(() => {
+    if (user) {
+      navigate(from, { replace: true }); 
+    }
+  }, [user, from, navigate]);
 
   return (
     <div className="body py-12 pt-20">
@@ -133,7 +162,7 @@ const Login = () => {
                         <FontAwesomeIcon
                           className="hover:text-teal-600 text-xl mr-5"
                           icon={faGoogle}
-                          // onClick={() => signInWithGoogle()}
+                          onClick={() => signInWithGoogle()}
                         />
                         <FontAwesomeIcon
                           className="hover:text-teal-600 text-xl "

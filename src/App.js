@@ -16,8 +16,9 @@ import Profile from "./Pages/Shared/Profile/Profile";
 import UpdateProfile from "./Pages/Shared/UpdateProfile/UpdateProfile";
 import Users from "./Pages/Shared/Users/Users";
 import MyBlogs from "./Pages/Shared/MyBlogs/MyBlogs";
+import RequireAuth from "./Pages/Shared/RequireAuth/RequireAuth";
 
-// 
+//
 function App() {
   return (
     <>
@@ -28,16 +29,23 @@ function App() {
           <Route path="/contact" element={<Contact />}></Route>
           <Route path="/blog" element={<Blog />}></Route>
           {/* dashboard */}
-          <Route path="/dashboard" element={<Dashboard />}>
-          <Route index path="profile" element={<Profile/>}></Route>
+          <Route
+            path="/dashboard"
+            element={
+              <RequireAuth>
+                <Dashboard />
+              </RequireAuth>
+            }
+          >
+            <Route index path="profile" element={<Profile />}></Route>
 
-            <Route path="post-blog" element={<PostBlog/>}></Route>
-            <Route path="update-profile" element={<UpdateProfile/>}></Route>
-            <Route path="users" element={<Users/>}></Route>
-            <Route path="my-blogs" element={<MyBlogs/>}></Route>
+            <Route path="post-blog" element={<PostBlog />}></Route>
+            <Route path="update-profile" element={<UpdateProfile />}></Route>
+            <Route path="users" element={<Users />}></Route>
+            <Route path="my-blogs" element={<MyBlogs />}></Route>
           </Route>
           {/* load single blog */}
-          <Route path="/blog/:id" element={<SingleBlog/>}></Route>
+          <Route path="/blog/:id" element={<SingleBlog />}></Route>
           <Route path="/about" element={<About />}></Route>
           <Route path="/login" element={<Login />}></Route>
           <Route path="/register" element={<Register />}></Route>
