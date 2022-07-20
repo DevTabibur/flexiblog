@@ -10,6 +10,7 @@ import {
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAuthState, useSignInWithEmailAndPassword, useSignInWithGoogle } from "react-firebase-hooks/auth";
 import auth from "../../../Firebase/firebase.init";
+import useToken from "../../../Hooks/useToken";
 
 const Login = () => {
   // for returning user the exact page he wants to enter after login
@@ -25,7 +26,6 @@ const [
 ] = useSignInWithEmailAndPassword(auth);
 
 const [user] = useAuthState(auth);
-console.log(user)
 
   const {
     register,
@@ -40,15 +40,20 @@ console.log(user)
     console.log('user', data)
   };
 
- 
-  // if user logged-in then it'll take user the page what they want to see the page,
+ // if user is login, then we'll give it token.. and then redirect to the home page
+ const [token] = useToken(googleUser || signInUser);
+ if(token){
+   navigate("/home");
+ }
+  // if token is valid, then user will automatically redirect their page..
   let from = location.state?.from?.pathname || "/";
   useEffect(() => {
-    if (user) {
+    if (token) {
       navigate(from, { replace: true }); 
     }
-  }, [user, from, navigate]);
+  }, [token, from, navigate]);
 
+  
   return (
     <div className="body py-12 pt-20">
       <div className="container mx-auto px-4">
