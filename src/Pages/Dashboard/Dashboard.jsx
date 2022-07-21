@@ -36,7 +36,7 @@ const Dashboard = () => {
     <div className="">
       <div class="drawer drawer-mobile sidebar">
         <input id="my-drawer-2" type="checkbox" class="drawer-toggle" />
-        <div class="drawer-content w-full">
+        <div class="drawer-content w-full md:m-5">
           {/* <!-- Page content here --> */}
           <label
             for="my-drawer-2"

@@ -8,7 +8,7 @@ const Users = () => {
 
   return (
     <div className="md:flex">
-    <table class="table-fixed md:m-5 relative w-full">
+    <table class="table-fixed  relative w-full">
         <thead>
           <tr>
             <th>Email</th>
