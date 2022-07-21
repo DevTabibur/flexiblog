@@ -1,0 +1,18 @@
+table{
+}
+thead{
+    background-color: #0e101c;
+    padding: 5px;
+    border-radius: 5px 5px 0 0;
+    color: #fff;
+}
+thead tr th{
+    padding: 10px;
+    border-radius: 10px;
+    color: #fff;
+}
+tbody tr td{
+    text-align: center;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.164);
+    padding: 5px;
+}

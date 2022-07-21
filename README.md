@@ -9,3 +9,4 @@
 4. npm i @tanstack/react-query
 5. react hook form
 6. npm install --save react-firebase-hooks 
+7. npm uninstall --save react-modern-drawer

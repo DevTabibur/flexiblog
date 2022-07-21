@@ -36,7 +36,7 @@ const Dashboard = () => {
     <div className="">
       <div class="drawer drawer-mobile sidebar">
         <input id="my-drawer-2" type="checkbox" class="drawer-toggle" />
-        <div class="drawer-content flex flex-col items-center justify-center">
+        <div class="drawer-content w-full">
           {/* <!-- Page content here --> */}
           <label
             for="my-drawer-2"
@@ -48,7 +48,7 @@ const Dashboard = () => {
         </div>
         <div class="drawer-side">
           <label for="my-drawer-2" class="drawer-overlay"></label>
-          <ul class="menu p-4 overflow-y-auto w-80 bg-teal-100 text-base-content">
+          <ul class="menu p-4 overflow-y-auto  bg-teal-100 text-base-content">
             {/* <!-- Sidebar content here --> */}
             {menu}
           </ul>
