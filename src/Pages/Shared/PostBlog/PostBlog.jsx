@@ -18,25 +18,46 @@ const PostBlog = () => {
     formState: { errors },
   } = useForm();
 
-  const [info, setInfo] = useState([]);
-  const onSubmit = (data) => {
-    setInfo(data);
-    const url = `http://localhost:5000/blogs`;
-    fetch(url, {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
+  const imageStorageKey = "5f6929104dd3cbfb62da6b4d6aa81002";
+
+  const onSubmit = async (data) => {
+
+    console.log('data 00 ', data);
+
+    // const image = data.authorImg[0];
+    // const image2 = data.blogImg[0];
+
+
+    // const formData = new FormData();
+    // formData.append("Image", image);
+    // formData.append("Image2", image2);
+
+    // const url = `https://api.imgbb.com/1/upload?key=${imageStorageKey}`;
+
+    // fetch(url ,{
+    //   method: 'POST',
+    //   body: formData,
+    // })
+    // .then( res => res.json())
+    // .then ( result => {
+    //   console.log('result', result)
+    // })
+
+    // send obj in db
+    fetch('http://localhost:5000/blogs', {
+      method : 'POST',
+      headers:{
+        'content-type' : 'application/json',
       },
       body: JSON.stringify(data),
     })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.acknowledgement === "success") {
-          console.log("data inside fetch", data);
-          // reset form
-          document.getElementById("form-parent").reset();
-        }
-      });
+    .then(res => res.json())
+    .then (data =>{
+      console.log('send in db', data)
+    })
+
+
+
   };
 
   return (
@@ -69,11 +90,11 @@ const PostBlog = () => {
           {...register("published")}
         />
 
-        {/* <label>Your Name*</label>
+        <label>Your Name*</label>
         <input
           className="input-field"
           {...register("name", {
-            required: true
+            required: true,
           })}
         />
         {errors?.name?.type === "required" && (
@@ -105,7 +126,7 @@ const PostBlog = () => {
         />
         {errors?.blogImg?.type === "required" && (
           <p className="warning-text">Image is required</p>
-        )} */}
+        )}
 
         <label>Blog Title*</label>
         <input
@@ -119,7 +140,7 @@ const PostBlog = () => {
         )}
 
         <label>Select Category*</label>
-        <select {...register("category")}>
+        <select className="select" {...register("category")}>
           <option value="technology">Technology</option>
           <option value="travel">Travel</option>
           <option value="other">Other</option>
