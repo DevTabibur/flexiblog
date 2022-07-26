@@ -8,14 +8,18 @@ import {
   faTwitter,
 } from "@fortawesome/free-brands-svg-icons";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { useAuthState, useSignInWithEmailAndPassword, useSignInWithGoogle } from "react-firebase-hooks/auth";
+import { useAuthState, useSendPasswordResetEmail, useSignInWithEmailAndPassword, useSignInWithGoogle } from "react-firebase-hooks/auth";
 import auth from "../../../Firebase/firebase.init";
 import useToken from "../../../Hooks/useToken";
+import Loader from "../Loader/Loader";
 
 const Login = () => {
   // for returning user the exact page he wants to enter after login
   const navigate = useNavigate();
   const location = useLocation();
+
+  // to get registered user's email and password
+  const [user] = useAuthState(auth);
 
 const [signInWithGoogle, googleUser, googleLoading, googleError] = useSignInWithGoogle(auth);
 const [
@@ -25,8 +29,6 @@ const [
   signInError,
 ] = useSignInWithEmailAndPassword(auth);
 
-const [user] = useAuthState(auth);
-
   const {
     register,
     handleSubmit,
@@ -34,17 +36,14 @@ const [user] = useAuthState(auth);
   } = useForm();
 
   const [email, setEmail] = useState('');
-  const onSubmit = (data) => {
-    signInWithEmailAndPassword(data.email, data.password);
-    setEmail(data.email);
-    console.log('user', data)
+  const onSubmit = async (data) => {
+    await signInWithEmailAndPassword(data.email, data.password);
+    await setEmail(data.email);
   };
+
 
  // if user is login, then we'll give it token.. and then redirect to the home page
  const [token] = useToken(googleUser || signInUser);
- if(token){
-   navigate("/home");
- }
   // if token is valid, then user will automatically redirect their page..
   let from = location.state?.from?.pathname || "/";
   useEffect(() => {
@@ -53,6 +52,27 @@ const [user] = useAuthState(auth);
     }
   }, [token, from, navigate]);
 
+
+  // for reset/forgetting password
+  const [sendPasswordResetEmail, resetSending, resetError] =
+    useSendPasswordResetEmail(auth);
+
+    // for loading
+  if (googleLoading || signInLoading || resetSending) {
+    return <Loader></Loader>;
+  }
+
+  // for error showing messages
+  let showSignInError ;
+  if (googleError || signInError || resetError) {
+    showSignInError = (
+      <small>
+        <p className="text-red-500">
+          {googleError?.message || signInError?.message || resetError?.message}
+        </p>
+      </small>
+    );
+  }
   
   return (
     <div className="body py-12 pt-20">
@@ -127,17 +147,17 @@ const [user] = useAuthState(auth);
                   )}
                 </label>
 
-                {/* {signInError} */}
+               {showSignInError}
                 <input type="submit" value="LOGIN" />
 
                 <label className="label my-0 py-0">
                   <span className="label-text-alt">
                     <div className="form-control my-0 py-0">
-                      <label className="cursor-pointer label my-0 py-0">
+                      <label onClick={async () => {
+                            await sendPasswordResetEmail(email)
+                          }} className="cursor-pointer label my-0 py-0">
                         <span
-                          // onClick={async () => {
-                          //   await sendPasswordResetEmail(email)
-                          // }}
+                          
                           className="label-text-alt"
                         >
                           <p className="text-teal-500 text-sm">

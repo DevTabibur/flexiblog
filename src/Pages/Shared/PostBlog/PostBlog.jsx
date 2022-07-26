@@ -4,6 +4,7 @@ import "./PostBlog.css";
 // demo https://www.jotform.com/build/222014815563450
 // demo https://codepen.io/palashbasak/pen/oxQbed
 // demo https://codepen.io/leo-bian/pen/ZvmyVb
+
 import { useForm } from "react-hook-form";
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../../Firebase/firebase.init";
@@ -21,43 +22,41 @@ const PostBlog = () => {
   const imageStorageKey = "5f6929104dd3cbfb62da6b4d6aa81002";
 
   const onSubmit = async (data) => {
-
-    console.log('data 00 ', data);
+    console.log("data 00 ", data);
 
     // const image = data.authorImg[0];
-    // const image2 = data.blogImg[0];
+    const image2 = data.blogImg[0];
 
-
-    // const formData = new FormData();
+    const formData = new FormData();
     // formData.append("Image", image);
-    // formData.append("Image2", image2);
+    formData.append("Image2", image2);
 
-    // const url = `https://api.imgbb.com/1/upload?key=${imageStorageKey}`;
+    const url = `https://api.imgbb.com/1/upload?key=${imageStorageKey}`;
 
-    // fetch(url ,{
-    //   method: 'POST',
-    //   body: formData,
-    // })
-    // .then( res => res.json())
-    // .then ( result => {
-    //   console.log('result', result)
-    // })
-
-    // send obj in db
-    fetch('http://localhost:5000/blogs', {
-      method : 'POST',
-      headers:{
-        'content-type' : 'application/json',
-      },
-      body: JSON.stringify(data),
+    fetch(url, {
+      method: "POST",
+      body: formData,
     })
-    .then(res => res.json())
-    .then (data =>{
-      console.log('send in db', data)
-    })
-
-
-
+      .then((res) => res.json())
+      .then((result) => {
+        if (result.success) {
+          // send obj in db
+          fetch("http://localhost:5000/blogs", {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+              authorization: `Bearer ${localStorage.getItem('accessToken')}`
+            },
+            body: JSON.stringify(data),
+          })
+            .then((res) => res.json())
+            .then((data) => {
+              console.log("send in db", data);
+              // reset form
+              reset()
+            });
+        }
+      });
   };
 
   return (
@@ -101,7 +100,7 @@ const PostBlog = () => {
           <p className="warning-text">Name is required</p>
         )}
 
-        <label>Upload Author Image*</label>
+        {/* <label>Upload Author Image*</label>
         <input
           className="input-field"
           type="file"
@@ -111,7 +110,7 @@ const PostBlog = () => {
         />
         {errors?.authorImg?.type === "required" && (
           <p className="warning-text">Author Image is required</p>
-        )}
+        )} */}
 
         <label>Author Bio</label>
         <input className="input-field" {...register("authorBio", {})} />

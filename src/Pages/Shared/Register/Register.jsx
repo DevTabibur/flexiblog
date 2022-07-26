@@ -1,24 +1,64 @@
 import React from 'react';
 import './Register.css';
 import { useForm } from "react-hook-form";
-import { Link } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faFacebookF,
   faGoogle,
   faTwitter,
 } from "@fortawesome/free-brands-svg-icons";
+import auth from '../../../Firebase/firebase.init';
+import { useCreateUserWithEmailAndPassword, useSignInWithGoogle, useUpdateProfile } from 'react-firebase-hooks/auth';
+import useToken from '../../../Hooks/useToken';
+import Loader from '../Loader/Loader';
 
 const Register = () => {
+  const [
+    createUserWithEmailAndPassword,
+    createUser,
+    createLoading,
+    createError,
+  ] = useCreateUserWithEmailAndPassword(auth);
+  const [updateProfile, updating, updateError] = useUpdateProfile(auth);
+  const [signInWithGoogle, googleUser, googleLoading, googleError] = useSignInWithGoogle(auth);
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
-    console.log(data);
+  const navigate = useNavigate();
+
+  const onSubmit = async (data) => {
+    await createUserWithEmailAndPassword(data.email, data.password);
+    await updateProfile({ displayName: data.name });
+
   };
+
+  const [token] = useToken(createUser || googleUser);
+  // get all type of user
+  if (token) {
+    navigate("/home");
+  }
+
+  // for loader
+  if (createLoading || googleLoading || updating) {
+    return <Loader></Loader>;
+  }
+
+  // for error showing messages
+  let signInError;
+  if (createError || googleError || updateError) {
+    signInError = (
+      <small>
+        <p className="text-red-500">
+          {createError?.message || googleError?.message || updateError?.message}
+        </p>
+      </small>
+    );
+  }
 
   return (
     <div className="body py-12 pt-20">

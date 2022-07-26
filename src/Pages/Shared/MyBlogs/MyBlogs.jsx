@@ -17,7 +17,7 @@ const MyBlogs = () => {
 
   useEffect(() => {
     setMyBlogs(matchingWithMail);
-  }, [matchingWithMail]);
+  }, []);
 
   if (userLoading) {
     return <Loader />;
@@ -55,22 +55,22 @@ const MyBlogs = () => {
     <>
       <div className="my-blogs">
         <div className="container mx-auto px-4 my-10">
-          <section class="text-gray-600 body-font">
-            <div class="flex flex-col text-center w-full mb-20">
-              <h2 class="text-xs text-indigo-500 tracking-widest font-medium title-font mb-1">
+          <section className="text-gray-600 body-font">
+            <div className="flex flex-col text-center w-full mb-20">
+              <h2 className="text-xs text-indigo-500 tracking-widest font-medium title-font mb-1">
                 Your Posted Blogs are here!
               </h2>
-              <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">
+              <h1 className="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">
                 You Have {myBlogs.length} Blogs.
               </h1>
-              <p class="lg:w-2/3 mx-auto leading-relaxed text-base">
+              <p className="lg:w-2/3 mx-auto leading-relaxed text-base">
                 You can Delete, Update and Modify your blog!
               </p>
             </div>
             {/* blog section */}
-            <div class="text-gray-600 body-font">
-              <div class="container px-5 mx-auto">
-                <div class="md:grid grid-cols-4 gap-4">
+            <div className="text-gray-600 body-font">
+              <div className="container px-5 mx-auto">
+                <div className="md:grid grid-cols-4 gap-4">
                   {myBlogs.map((blog) => (
                     <ShowOwnBlog
                       key={blog._id}

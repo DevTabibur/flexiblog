@@ -17,8 +17,9 @@ import UpdateProfile from "./Pages/Shared/UpdateProfile/UpdateProfile";
 import Users from "./Pages/Shared/Users/Users";
 import MyBlogs from "./Pages/Shared/MyBlogs/MyBlogs";
 import RequireAuth from "./Pages/Shared/RequireAuth/RequireAuth";
+import { ToastContainer, toast } from 'react-toastify';
+  import 'react-toastify/dist/ReactToastify.css';
 
-//
 function App() {
   return (
     <>
@@ -52,6 +53,7 @@ function App() {
           <Route path="/register" element={<Register />}></Route>
         </Routes>
       </Header>
+      <ToastContainer />
     </>
   );
 }
