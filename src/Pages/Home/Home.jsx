@@ -8,8 +8,8 @@ import ShowBlog from "../Shared/ShowBlog/ShowBlog";
 const Home = () => {
 
   const [blogs] = useBlogs();
-  const sliceBlogs = blogs.slice(0, 3);
-  console.log(sliceBlogs)
+  // const sliceBlogs = blogs.slice(0, 3);
+  // console.log(sliceBlogs)
 
   return (
     <>

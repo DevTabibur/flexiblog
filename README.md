@@ -11,3 +11,4 @@
 6. npm install --save react-firebase-hooks 
 7. npm uninstall --save react-modern-drawer
 8. npm i react-toastify
+9. npm i react-query@3.39.2

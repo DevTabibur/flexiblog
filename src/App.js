@@ -17,8 +17,9 @@ import UpdateProfile from "./Pages/Shared/UpdateProfile/UpdateProfile";
 import Users from "./Pages/Shared/Users/Users";
 import MyBlogs from "./Pages/Shared/MyBlogs/MyBlogs";
 import RequireAuth from "./Pages/Shared/RequireAuth/RequireAuth";
-import { ToastContainer, toast } from 'react-toastify';
-  import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import RequireAdmin from "./Pages/Shared/RequireAdmin/RequireAdmin";
 
 function App() {
   return (
@@ -42,7 +43,16 @@ function App() {
 
             <Route path="post-blog" element={<PostBlog />}></Route>
             <Route path="update-profile" element={<UpdateProfile />}></Route>
-            <Route path="users" element={<Users />}></Route>
+
+            <Route
+              path="users"
+              element={
+                <RequireAdmin>
+                  <Users />
+                </RequireAdmin>
+              }
+            ></Route>
+
             <Route path="my-blogs" element={<MyBlogs />}></Route>
           </Route>
           {/* load single blog */}
