@@ -34,21 +34,21 @@ const Dashboard = () => {
   ];
   return (
     <div className="">
-      <div class="drawer drawer-mobile sidebar">
-        <input id="my-drawer-2" type="checkbox" class="drawer-toggle" />
-        <div class="drawer-content w-full md:m-5">
+      <div className="drawer drawer-mobile sidebar">
+        <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
+        <div className="drawer-content w-full md:m-5">
           {/* <!-- Page content here --> */}
           <label
             for="my-drawer-2"
-            class="btn btn-primary drawer-button lg:hidden"
+            className="btn btn-primary drawer-button lg:hidden"
           >
             Open drawer
           </label>
           <Outlet />
         </div>
-        <div class="drawer-side">
-          <label for="my-drawer-2" class="drawer-overlay"></label>
-          <ul class="menu p-4 overflow-y-auto  bg-teal-100 text-base-content">
+        <div className="drawer-side">
+          <label for="my-drawer-2" className="drawer-overlay"></label>
+          <ul className="menu p-4 overflow-y-auto  bg-teal-100 text-base-content">
             {/* <!-- Sidebar content here --> */}
             {menu}
           </ul>

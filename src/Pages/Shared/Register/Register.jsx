@@ -158,7 +158,7 @@ const Register = () => {
                   )}
                 </label>
 
-                {/* {signInError} */}
+                {signInError}
                 <input type="submit" value="REGISTER" />
 
                 <label className="label my-0 py-0">
