@@ -10,26 +10,31 @@ import {
   faUpload
 } from "@fortawesome/free-solid-svg-icons";
 import "./Dashboard.css";
-
+import useAdmin from "../../Hooks/useAdmin";
+import { useAuthState } from 'react-firebase-hooks/auth';
+import auth from "../../Firebase/firebase.init";
 
 const Dashboard = () => {
+  const [user] = useAuthState(auth);
+  const [admin] = useAdmin(user);
+
   const menu = [
     <>
       <li className="my-1 font-semibold">
       <Link to="/dashboard/profile"><FontAwesomeIcon className="" icon={faUser}/> PROFILE</Link>
       </li>
-      <li className="my-1 font-semibold">
+      { admin && <li className="my-1 font-semibold">
         <Link to="/dashboard/post-blog"><FontAwesomeIcon className="" icon={faUpload}/> POST BLOG</Link>
-      </li>
+      </li>}
       <li className="my-1 font-semibold">
         <Link to="/dashboard/update-profile"><FontAwesomeIcon className="" icon={faMarker}/> UPDATE PROFILE</Link>
       </li>
       <li className="my-1 font-semibold">
         <Link to="/dashboard/users"><FontAwesomeIcon className="" icon={faUsers}/> USERS</Link>
       </li>
-      <li className="my-1 font-semibold">
+      { admin && <li className="my-1 font-semibold">
         <Link to="/dashboard/my-blogs"><FontAwesomeIcon className="" icon={faBlog}/> MY BLOGS</Link>
-      </li>
+      </li>}
     </>,
   ];
   return (
