@@ -20,6 +20,7 @@ import RequireAuth from "./Pages/Shared/RequireAuth/RequireAuth";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import RequireAdmin from "./Pages/Shared/RequireAdmin/RequireAdmin";
+import Footer from "./Pages/Shared/Footer/Footer";
 
 function App() {
   return (
@@ -44,14 +45,7 @@ function App() {
             <Route path="post-blog" element={<PostBlog />}></Route>
             <Route path="update-profile" element={<UpdateProfile />}></Route>
 
-            <Route
-              path="users"
-              element={
-                <RequireAdmin>
-                  <Users />
-                </RequireAdmin>
-              }
-            ></Route>
+            <Route path="users" element={<Users />}></Route>
 
             <Route path="my-blogs" element={<MyBlogs />}></Route>
           </Route>
@@ -63,6 +57,7 @@ function App() {
           <Route path="/register" element={<Register />}></Route>
         </Routes>
       </Header>
+      <Footer></Footer>
       <ToastContainer />
     </>
   );

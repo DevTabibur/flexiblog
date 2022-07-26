@@ -6,23 +6,23 @@ import "./Users.css";
 import Loader from "../Loader/Loader";
 
 const Users = () => {
-  // const [users] = useUser();
-  const {
-    data:users,
-    isLoading,
-    refetch,
-  } = useQuery("users", () => 
-    fetch(`http://localhost:5000/users`, {
-      method: "GET",
-      headers: {
-        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-      },
-    })
-  ).then(res => res.json());
+  const [users, customLoading] = useUser();
+  // const {
+  //   data:users,
+  //   isLoading,
+  //   refetch,
+  // } = useQuery("users", () => 
+  //   fetch(`http://localhost:5000/users`, {
+  //     method: "GET",
+  //     headers: {
+  //       authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+  //     },
+  //   })
+  // ).then(res => res.json());
 
-  // if(isLoading){
-  //   return <Loader></Loader>
-  // }
+  // // if(isLoading){
+  // //   return <Loader></Loader>
+  // // }
 
   return (
     <div className="md:flex">
@@ -37,7 +37,7 @@ const Users = () => {
         </thead>
         <tbody>
           {users.map((user) => (
-            <UserRow key={user._id} user={user} refetch={refetch}/>
+            <UserRow key={user._id} user={user} customLoading={customLoading} />
           ))}
         </tbody>
       </table>

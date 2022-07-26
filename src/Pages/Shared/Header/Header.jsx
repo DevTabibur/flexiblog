@@ -12,11 +12,6 @@ import { useUpdateProfile } from 'react-firebase-hooks/auth';
 const Header = ({ children }) => {
   const [user] = useAuthState(auth);
 
-
-  const logout = () => {
-    signOut(auth);
-  };
-
   const menu = [
     <>
       <li>
@@ -71,7 +66,7 @@ const Header = ({ children }) => {
                 <span className="badge">New</span>
               </Link>
             </li>
-            <li onClick={logout}>
+            <li onClick={()=>signOut(auth)}>
               <a>Logout</a>
             </li>
           </ul>

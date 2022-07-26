@@ -1,21 +1,24 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from "react";
 
 const useUser = () => {
-    const [users, setUsers] = useState([]);
+  const [users, setUsers] = useState([]);
 
-    useEffect(() =>{
-        fetch(`http://localhost:5000/users`, {
+  const [customLoading, setCustomLoading] = useState(true);
+  useEffect(() => {
+    fetch(`http://localhost:5000/users`, {
       method: "GET",
       headers: {
-        'content-type': 'application/json',
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,
       },
-    }).then(res => res.json())
-    .then(data =>{
-      setUsers(data);
     })
-    }, [])
-  return [users]
-}
+      .then((res) => res.json())
+      .then((data) => {
+        setUsers(data);
+        setCustomLoading(false);
+      });
+  }, [users]);
 
-export default useUser
+  return [users, customLoading];
+};
+
+export default useUser;
