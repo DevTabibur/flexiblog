@@ -56,8 +56,9 @@ function App() {
           <Route path="/register" element={<Register />}></Route>
           <Route path="/register" element={<Register />}></Route>
         </Routes>
-        <Footer></Footer>
       </Header>
+        {/* <Footer></Footer> */}
+
       
       <ToastContainer />
     </>

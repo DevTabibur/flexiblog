@@ -7,7 +7,7 @@ const Contact = () => {
     <section className="text-gray-600 body-font relative">
     <div className="flex flex-col text-center w-full my-20">
           <h2 className="text-xs text-teal-500 tracking-widest font-medium title-font mb-1">
-            You can get met here!
+            You can get me here!
           </h2>
           <h1 className="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">
             To Get Me, PLease Contact Me!!

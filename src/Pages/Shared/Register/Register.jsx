@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './Register.css';
 import { useForm } from "react-hook-form";
 import { Link, Navigate, useNavigate } from 'react-router-dom';
@@ -34,7 +34,6 @@ const Register = () => {
   const onSubmit = async (data) => {
     await createUserWithEmailAndPassword(data.email, data.password);
     await updateProfile({ displayName: data.name });
-    navigate("/home");
 
   };
 
@@ -43,6 +42,12 @@ const Register = () => {
   if (token) {
     navigate("/home");
   }
+  // useEffect(()=>{
+  //   if (token) {
+  //     navigate("/home");
+  //   }
+  // }, [createUser || googleUser])
+  
 
   // for loader
   if (createLoading || googleLoading || updating) {
@@ -199,7 +204,7 @@ const Register = () => {
                         <FontAwesomeIcon
                           className="hover:text-teal-600 text-xl mr-5"
                           icon={faGoogle}
-                          // onClick={() => signInWithGoogle()}
+                          onClick={() => signInWithGoogle()}
                         />
                         <FontAwesomeIcon
                           className="hover:text-teal-600 text-xl "

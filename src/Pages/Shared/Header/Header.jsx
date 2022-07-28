@@ -12,6 +12,12 @@ import { useUpdateProfile } from 'react-firebase-hooks/auth';
 const Header = ({ children }) => {
   const [user] = useAuthState(auth);
 
+  const logOut = () => {
+    signOut(auth);
+    // for removing jwt token when user logout
+    localStorage.removeItem('accessToken');
+  }
+  
   const menu = [
     <>
       <li>
@@ -66,7 +72,7 @@ const Header = ({ children }) => {
                 <span className="badge">New</span>
               </Link>
             </li>
-            <li onClick={()=>signOut(auth)}>
+            <li onClick={logOut}>
               <a>Logout</a>
             </li>
           </ul>

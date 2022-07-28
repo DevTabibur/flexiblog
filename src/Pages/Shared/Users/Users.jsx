@@ -6,7 +6,7 @@ import "./Users.css";
 import Loader from "../Loader/Loader";
 
 const Users = () => {
-  const [users, customLoading] = useUser();
+  const [users] = useUser();
   // const {
   //   data:users,
   //   isLoading,
@@ -37,7 +37,7 @@ const Users = () => {
         </thead>
         <tbody>
           {users.map((user) => (
-            <UserRow key={user._id} user={user} customLoading={customLoading} />
+            <UserRow key={user._id} user={user}  />
           ))}
         </tbody>
       </table>

@@ -5,7 +5,7 @@ import auth from "../../../Firebase/firebase.init";
 import useAdmin from "../../../Hooks/useAdmin";
 import "./UserRow.css";
 
-const UserRow = ({ user, customLoading }) => {
+const UserRow = ({ user }) => {
   const { email, name , role} = user;
   const [userAuth] = useAuthState(auth);
   const [admin] = useAdmin(userAuth);
@@ -31,7 +31,6 @@ const UserRow = ({ user, customLoading }) => {
           console.log("data inside the make admin function", data);
 
           toast.success("User made an admin");
-          customLoading(true);
         }
       });
   };
